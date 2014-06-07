@@ -1,20 +1,98 @@
 # Reproducible Research: Peer Assessment 1
 
+### Load required packages
+```{r packages, warning=FALSE, message=FALSE}
+library(dplyr)
+library(knitr)
+library(ggvis)
+library(ggplot2)
+```
 
 ## Loading and preprocessing the data
+```{r loand-prepocess}
+if(!file.exists("activity.csv"))
+  unzip("activity.zip")
+
+activityDF <- read.csv("activity.csv") %>%
+  mutate(date = as.Date(date, "%Y-%m-%d"))
+str(activityDF)
+```
 
 
+## What is mean total number of steps taken per day? {#actPerDay}
+```{r histogram-steps}
+actPerDay <- activityDF %>%
+  group_by(date) %>%
+  summarise(steps = sum(steps, na.rm = TRUE))
 
-## What is mean total number of steps taken per day?
+actPerDay %>%
+  ggvis(~steps/1e3) %>% 
+  layer_histograms(binwidth = 1) %>%
+  add_guide_axis("x", title = "Steps (thousands)") %>%
+  add_guide_axis("y", title = "Day Occurence")
 
+summarise(actPerDay, mean(steps), median(steps))
+```
 
 
 ## What is the average daily activity pattern?
+```{r average-daily-pattern}
+actPerInt <- activityDF %>%
+  group_by(interval) %>%
+  summarise(steps = mean(steps, na.rm = TRUE))
 
+actPerInt %>%
+  ggvis(~interval, ~steps) %>%
+  layer_paths() %>%
+  add_guide_axis("x", title = "Interval") %>%
+  add_guide_axis("y", title = "Number of Average Steps")
 
+actPerInt$interval[ which.max(actPerInt$steps) ]
+```
 
 ## Imputing missing values
+```{r na-summary}
+sum(is.na(activityDF$steps))
+```
 
+We are going to impute these missing values using average steps by interval.
 
+```{r imputing-na}
+imputedDF <- activityDF %>%
+  left_join(actPerInt, by = "interval") %>%
+  mutate(steps = ifelse(is.na(steps.x), steps.y, steps.x))
+```
+
+```{r imputed-hist}
+imputedActByDay <- imputedDF %>%
+  group_by(date) %>%
+  summarise(steps = sum(steps))
+
+imputedActByDay %>%
+  ggvis(~steps/1e3) %>% 
+  layer_histograms(binwidth = 1) %>%
+  add_guide_axis("x", title = "Steps (thousands)") %>%
+  add_guide_axis("y", title = "Day Occurence")
+
+summarise(imputedActByDay, mean(steps), median(steps))
+```
+
+The histogram overall is very similar to the one we generated [earlier](#actPerDay), execept that we have far less days falling into the zero steps bucket. This makes sense because we imputed `NA` with interval average, which shifted mean up quite a bit while kept median roughly the same.
 
 ## Are there differences in activity patterns between weekdays and weekends?
+```{r weekday-vs-weekend}
+partitionedDF <- imputedDF %>%
+  mutate(weekday = as.POSIXlt(date)$wday) %>%
+  mutate(weekday = weekday > 0 & weekday < 6) %>%
+  mutate(weekday = factor(weekday, labels = c("Weekend", "Weekday"))) %>%
+  group_by(weekday, interval) %>%
+  summarise(steps = mean(steps))
+
+###ggvis doesn't have subplot just yet :(
+ggplot(partitionedDF, aes(interval, steps)) +
+  geom_line() +
+  facet_grid(weekday ~ .) +
+  theme_bw() +
+  labs(x = "Interval",
+       y = "Number of Average Steps")
+```
