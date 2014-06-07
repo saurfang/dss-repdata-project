@@ -307,7 +307,6 @@ ggplot(imputedActByDay, aes(steps/1e3)) +
   group_by(weekday, interval) %&gt;%
   summarise(steps = mean(steps))
 
-###ggvis doesn&#39;t have subplot just yet :(
 ggplot(partitionedDF, aes(interval, steps)) +
   geom_line() +
   facet_grid(weekday ~ .) +

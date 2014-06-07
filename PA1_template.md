@@ -135,7 +135,6 @@ partitionedDF <- imputedDF %>%
   group_by(weekday, interval) %>%
   summarise(steps = mean(steps))
 
-###ggvis doesn't have subplot just yet :(
 ggplot(partitionedDF, aes(interval, steps)) +
   geom_line() +
   facet_grid(weekday ~ .) +
