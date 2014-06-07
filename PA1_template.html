@@ -95,27 +95,27 @@ actPerDay %&gt;%
   layer_histograms(binwidth = 1) %&gt;%
   add_guide_axis(&quot;x&quot;, title = &quot;Steps (thousands)&quot;) %&gt;%
   add_guide_axis(&quot;y&quot;, title = &quot;Day Occurence&quot;)</code></pre>
-<p><div id="plot_id559198442-container" class="ggvis-output-container">
-<div id="plot_id559198442" class="ggvis-output"></div>
+<p><div id="plot_id897424915-container" class="ggvis-output-container">
+<div id="plot_id897424915" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id559198442_renderer_svg" class="ggvis-renderer-button" data-plot-id="plot_id559198442" data-renderer="svg">SVG</a>
+<a id="plot_id897424915_renderer_svg" class="ggvis-renderer-button" data-plot-id="plot_id897424915" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id559198442_renderer_canvas" class="ggvis-renderer-button" data-plot-id="plot_id559198442" data-renderer="canvas">Canvas</a>
+<a id="plot_id897424915_renderer_canvas" class="ggvis-renderer-button" data-plot-id="plot_id897424915" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id559198442_download" class="ggvis-download" data-plot-id="plot_id559198442">Download</a>
+<a id="plot_id897424915_download" class="ggvis-download" data-plot-id="plot_id897424915">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id559198442_spec = {
+var plot_id897424915_spec = {
 	"data" : [
 		{
 			"name" : "actPerDay0/bin1/stack2",
@@ -310,7 +310,7 @@ var plot_id559198442_spec = {
 	},
 	"handlers" : null
 };
-ggvis.getPlot("plot_id559198442").parseSpec(plot_id559198442_spec);
+ggvis.getPlot("plot_id897424915").parseSpec(plot_id897424915_spec);
 </script></p>
 <pre class="r"><code>summarise(actPerDay, mean(steps), median(steps))</code></pre>
 <pre><code>## Source: local data frame [1 x 2]
@@ -329,27 +329,27 @@ actPerInt %&gt;%
   layer_paths() %&gt;%
   add_guide_axis(&quot;x&quot;, title = &quot;Interval&quot;) %&gt;%
   add_guide_axis(&quot;y&quot;, title = &quot;Number of Average Steps&quot;)</code></pre>
-<p><div id="plot_id602985396-container" class="ggvis-output-container">
-<div id="plot_id602985396" class="ggvis-output"></div>
+<p><div id="plot_id339206274-container" class="ggvis-output-container">
+<div id="plot_id339206274" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id602985396_renderer_svg" class="ggvis-renderer-button" data-plot-id="plot_id602985396" data-renderer="svg">SVG</a>
+<a id="plot_id339206274_renderer_svg" class="ggvis-renderer-button" data-plot-id="plot_id339206274" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id602985396_renderer_canvas" class="ggvis-renderer-button" data-plot-id="plot_id602985396" data-renderer="canvas">Canvas</a>
+<a id="plot_id339206274_renderer_canvas" class="ggvis-renderer-button" data-plot-id="plot_id339206274" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id602985396_download" class="ggvis-download" data-plot-id="plot_id602985396">Download</a>
+<a id="plot_id339206274_download" class="ggvis-download" data-plot-id="plot_id339206274">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id602985396_spec = {
+var plot_id339206274_spec = {
 	"data" : [
 		{
 			"name" : "actPerInt0",
@@ -531,7 +531,7 @@ var plot_id602985396_spec = {
 	},
 	"handlers" : null
 };
-ggvis.getPlot("plot_id602985396").parseSpec(plot_id602985396_spec);
+ggvis.getPlot("plot_id339206274").parseSpec(plot_id339206274_spec);
 </script></p>
 <pre class="r"><code>actPerInt$interval[ which.max(actPerInt$steps) ]</code></pre>
 <pre><code>## [1] 835</code></pre>
@@ -553,27 +553,27 @@ imputedActByDay %&gt;%
   layer_histograms(binwidth = 1) %&gt;%
   add_guide_axis(&quot;x&quot;, title = &quot;Steps (thousands)&quot;) %&gt;%
   add_guide_axis(&quot;y&quot;, title = &quot;Day Occurence&quot;)</code></pre>
-<p><div id="plot_id805934323-container" class="ggvis-output-container">
-<div id="plot_id805934323" class="ggvis-output"></div>
+<p><div id="plot_id160750984-container" class="ggvis-output-container">
+<div id="plot_id160750984" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id805934323_renderer_svg" class="ggvis-renderer-button" data-plot-id="plot_id805934323" data-renderer="svg">SVG</a>
+<a id="plot_id160750984_renderer_svg" class="ggvis-renderer-button" data-plot-id="plot_id160750984" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id805934323_renderer_canvas" class="ggvis-renderer-button" data-plot-id="plot_id805934323" data-renderer="canvas">Canvas</a>
+<a id="plot_id160750984_renderer_canvas" class="ggvis-renderer-button" data-plot-id="plot_id160750984" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id805934323_download" class="ggvis-download" data-plot-id="plot_id805934323">Download</a>
+<a id="plot_id160750984_download" class="ggvis-download" data-plot-id="plot_id160750984">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id805934323_spec = {
+var plot_id160750984_spec = {
 	"data" : [
 		{
 			"name" : "imputedActByDay0/bin1/stack2",
@@ -768,7 +768,7 @@ var plot_id805934323_spec = {
 	},
 	"handlers" : null
 };
-ggvis.getPlot("plot_id805934323").parseSpec(plot_id805934323_spec);
+ggvis.getPlot("plot_id160750984").parseSpec(plot_id160750984_spec);
 </script></p>
 <pre class="r"><code>summarise(imputedActByDay, mean(steps), median(steps))</code></pre>
 <pre><code>## Source: local data frame [1 x 2]
