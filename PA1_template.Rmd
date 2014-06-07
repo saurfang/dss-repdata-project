@@ -3,8 +3,6 @@
 ### Load required packages
 ```{r packages, warning=FALSE, message=FALSE}
 library(dplyr)
-library(knitr)
-library(ggvis)
 library(ggplot2)
 ```
 
@@ -25,11 +23,11 @@ actPerDay <- activityDF %>%
   group_by(date) %>%
   summarise(steps = sum(steps, na.rm = TRUE))
 
-actPerDay %>%
-  ggvis(~steps/1e3) %>% 
-  layer_histograms(binwidth = 1) %>%
-  add_guide_axis("x", title = "Steps (thousands)") %>%
-  add_guide_axis("y", title = "Day Occurence")
+ggplot(actPerDay, aes(steps/1e3)) +
+  geom_histogram(binwidth = 1) +
+  theme_bw() +
+  labs(x = "Steps (thousands)",
+       y = "Day Occurence")
 
 summarise(actPerDay, mean(steps), median(steps))
 ```
@@ -41,11 +39,11 @@ actPerInt <- activityDF %>%
   group_by(interval) %>%
   summarise(steps = mean(steps, na.rm = TRUE))
 
-actPerInt %>%
-  ggvis(~interval, ~steps) %>%
-  layer_paths() %>%
-  add_guide_axis("x", title = "Interval") %>%
-  add_guide_axis("y", title = "Number of Average Steps")
+ggplot(actPerInt, aes(interval, steps)) +
+  geom_line() + 
+  theme_bw() +
+  labs(x = "Interval",
+       y = "Number of Average Steps")
 
 actPerInt$interval[ which.max(actPerInt$steps) ]
 ```
@@ -68,11 +66,11 @@ imputedActByDay <- imputedDF %>%
   group_by(date) %>%
   summarise(steps = sum(steps))
 
-imputedActByDay %>%
-  ggvis(~steps/1e3) %>% 
-  layer_histograms(binwidth = 1) %>%
-  add_guide_axis("x", title = "Steps (thousands)") %>%
-  add_guide_axis("y", title = "Day Occurence")
+ggplot(imputedActByDay, aes(steps/1e3)) +
+  geom_histogram(binwidth = 1) +
+  theme_bw() +
+  labs(x = "Steps (thousands)",
+       y = "Day Occurence")
 
 summarise(imputedActByDay, mean(steps), median(steps))
 ```

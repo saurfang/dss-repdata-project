@@ -4,8 +4,6 @@
 
 ```r
 library(dplyr)
-library(knitr)
-library(ggvis)
 library(ggplot2)
 ```
 
@@ -35,14 +33,14 @@ actPerDay <- activityDF %>%
   group_by(date) %>%
   summarise(steps = sum(steps, na.rm = TRUE))
 
-actPerDay %>%
-  ggvis(~steps/1e3) %>% 
-  layer_histograms(binwidth = 1) %>%
-  add_guide_axis("x", title = "Steps (thousands)") %>%
-  add_guide_axis("y", title = "Day Occurence")
+ggplot(actPerDay, aes(steps/1e3)) +
+  geom_histogram(binwidth = 1) +
+  theme_bw() +
+  labs(x = "Steps (thousands)",
+       y = "Day Occurence")
 ```
 
-preserveae23b524e627fe5b
+![plot of chunk histogram-steps](figure/histogram-steps.png) 
 
 ```r
 summarise(actPerDay, mean(steps), median(steps))
@@ -63,14 +61,14 @@ actPerInt <- activityDF %>%
   group_by(interval) %>%
   summarise(steps = mean(steps, na.rm = TRUE))
 
-actPerInt %>%
-  ggvis(~interval, ~steps) %>%
-  layer_paths() %>%
-  add_guide_axis("x", title = "Interval") %>%
-  add_guide_axis("y", title = "Number of Average Steps")
+ggplot(actPerInt, aes(interval, steps)) +
+  geom_line() + 
+  theme_bw() +
+  labs(x = "Interval",
+       y = "Number of Average Steps")
 ```
 
-preserve27effa3b5a677f36
+![plot of chunk average-daily-pattern](figure/average-daily-pattern.png) 
 
 ```r
 actPerInt$interval[ which.max(actPerInt$steps) ]
@@ -105,14 +103,14 @@ imputedActByDay <- imputedDF %>%
   group_by(date) %>%
   summarise(steps = sum(steps))
 
-imputedActByDay %>%
-  ggvis(~steps/1e3) %>% 
-  layer_histograms(binwidth = 1) %>%
-  add_guide_axis("x", title = "Steps (thousands)") %>%
-  add_guide_axis("y", title = "Day Occurence")
+ggplot(imputedActByDay, aes(steps/1e3)) +
+  geom_histogram(binwidth = 1) +
+  theme_bw() +
+  labs(x = "Steps (thousands)",
+       y = "Day Occurence")
 ```
 
-preserve0ea81a0fd481866f
+![plot of chunk imputed-hist](figure/imputed-hist.png) 
 
 ```r
 summarise(imputedActByDay, mean(steps), median(steps))
@@ -146,4 +144,4 @@ ggplot(partitionedDF, aes(interval, steps)) +
        y = "Number of Average Steps")
 ```
 
-<img src="./PA1_template_files/figure-html/weekday-vs-weekend.png" title="plot of chunk weekday-vs-weekend" alt="plot of chunk weekday-vs-weekend" width="672" />
+![plot of chunk weekday-vs-weekend](figure/weekday-vs-weekend.png) 
